@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using project6.Models;
 
 namespace project6.Controllers;
@@ -36,5 +37,13 @@ public class HomeController : Controller
         _context.SaveChanges();
 
         return View("Confirmation", response);
+    }
+
+    public IActionResult ViewAll ()
+    {
+        var film = _context.Movies
+            .OrderBy(x => x.Title).ToList();
+
+        return View(film);
     }
 }
