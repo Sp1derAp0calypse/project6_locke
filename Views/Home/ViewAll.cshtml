@@ -10,12 +10,13 @@
     <thead class='fw-bold'>
         <tr>
             <td>Title</td>
-            <td>Category</td>
+            <td>Category Name</td>
             <td>Director</td>
             <td>Release Year</td>
             <td>Rating</td>
             <td>Edited</td>
             <td>Lent to</td>
+            <td>Copied to Plex</td>
             <td>Notes</td>
         </tr>
     </thead>
@@ -25,12 +26,17 @@
     <tbody>
         <tr>
             <td>@x.Title</td>
-            <td>@x.Category</td>
-            <td>@x.Director</td>
+            <td>@x.CategoryName?.CategoryName</td>
             <td>@x.Year</td>
+            <td>@x.Director</td>
             <td>@x.Rating</td>
+            <td>@x.Edited</td>  
             <td>@x.LentTo</td>
+            <td>@x.CopiedToPlex</td>
             <td>@x.Notes</td>
+
+            <td><a class="btn btn-info" asp-asp-controller="Home" asp-action="Edit">Edit</a></td>
+                <td><a class="btn btn-danger" asp-asp-controller="Home" asp-action="Delete">Delete</a></td>
         </tr>
     </tbody>
     }

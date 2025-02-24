@@ -12,14 +12,23 @@
     <label>Title:</label>
     <input asp-for="Title" required /><br>
 
-    <label>Category:</label>
-    <input asp-for="Category" required /><br>
+    <label>Category</label>
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Categories c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select><br />
+
+    <label>Year:</label>
+    <input asp-for="Year" required /><br>
 
     <label>Director:</label>
     <input asp-for="Director" required /><br>
 
-    <label>Year:</label>
-    <input asp-for="Year" type="number" required /><br>
+    <label>Edited:</label>
+    <input asp-for="Edited" required /><br>
 
     <label>Rating:</label>
     <select asp-for="Rating">
@@ -29,8 +38,8 @@
         <option>R</option>
     </select><br>
 
-    <label>Edited:</label>
-    <input asp-for="Edited" type="checkbox" /><br>
+    <label>Copied To Plex:</label>
+    <input asp-for="CopiedToPlex" required /><br>
 
     <label>Lent To:</label>
     <input asp-for="LentTo" /><br>

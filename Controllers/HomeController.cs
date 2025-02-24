@@ -27,6 +27,10 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult AddMovie()
     {
+        ViewBag.Categories = _context.Categories //categories bag
+            .OrderBy(x => x.CategoryName)
+            .ToList();
+
         return View();
     }
 
@@ -42,8 +46,19 @@ public class HomeController : Controller
     public IActionResult ViewAll ()
     {
         var film = _context.Movies
-            .OrderBy(x => x.Title).ToList();
+            .Include(m => m.CategoryName) // Ensure CategoryName is loaded
+            .OrderBy(x => x.Title)
+            .ToList();
 
         return View(film);
+    }
+
+    public IActionResult Edit ()
+    {
+        ViewBag.Categories = _context.Categories //categories bag
+        .OrderBy(x => x.CategoryName)
+        .ToList();
+
+        return View("AddMovie");
     }
 }
