@@ -31,16 +31,28 @@ public class HomeController : Controller
             .OrderBy(x => x.CategoryName)
             .ToList();
 
-        return View(new Movie());
+        return View("AddMovie", new Movie());
     }
 
     [HttpPost]
     public IActionResult AddMovie(Movie response)
     {
-        _context.Movies.Add(response);
-        _context.SaveChanges();
+        if (ModelState.IsValid)
+        {
+            _context.Movies.Add(response);
+            _context.SaveChanges();
 
-        return View("Confirmation", response);
+            return View("Confirmation", response);
+        }
+
+        else
+        {
+            ViewBag.Categories = _context.Categories //categories bag
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+
+            return View(response);
+        }
     }
 
     public IActionResult ViewAll ()
